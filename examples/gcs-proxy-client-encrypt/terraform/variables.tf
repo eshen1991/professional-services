@@ -2,7 +2,7 @@ variable "project_id" {
   description = "The project ID to host the cluster in"
 }
 
-variable "name" {
+variable "cluster_name" {
   description = "GKE cluster name"
 }
 
@@ -11,20 +11,8 @@ variable "zones" {
   description = "The zone to host the cluster in (required if is a zonal cluster)"
 }
 
-variable "network" {
+variable "network_name" {
   description = "The VPC network to host the cluster in"
-}
-
-variable "subnetwork" {
-  description = "The subnetwork to host the cluster in"
-}
-
-variable "ip_range_pods" {
-  description = "The secondary ip range to use for pods"
-}
-
-variable "ip_range_services" {
-  description = "The secondary ip range to use for services"
 }
 
 variable "location" {

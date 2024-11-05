@@ -30,7 +30,7 @@ spec:
         emptyDir: {}
       containers:
       - name: gcs-app
-        image: us-docker.pkg.dev/axlearn/gcs-app/gcs-flask:v1
+        image: us-docker.pkg.dev/eshenshopping-proj-1/eshen-docker/gcs-flask
         ports:
         - containerPort: 8000
         env:
@@ -42,14 +42,14 @@ spec:
         - name: proxycerts
           mountPath: /proxy/certs
       - name: mitmproxy
-        image: us-docker.pkg.dev/axlearn/gcs-proxy/mitmproxy:v6
+        image: us-docker.pkg.dev/eshenshopping-proj-1/eshen-docker/mitmproxy
         ports:
         - containerPort: 8080
         env:
           - name: GCP_KMS_PROJECT_ID
             value: "axlearn"
           - name: GCP_KMS_KEY
-            value: "gcp-kms://projects/axlearn/locations/global/keyRings/test/cryptoKeys/proxy-kek"
+            value: "gcp-kms://projects/eshenshopping-proj-1/locations/global/keyRings/proxy/cryptoKeys/proxy-kek"
         volumeMounts:
         - name: proxycerts
           mountPath: /proxy/certs

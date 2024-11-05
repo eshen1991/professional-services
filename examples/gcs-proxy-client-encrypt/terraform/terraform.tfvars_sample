@@ -1,0 +1,6 @@
+project_id   = "eshenshopping-proj-1"
+cluster_name = "gcs-proxy-poc"
+zones        = ["us-central1-a"]
+network_name = "gcs-proxy-nw"
+keyring      = "proxy"
+keys         = ["proxy-kek"]
