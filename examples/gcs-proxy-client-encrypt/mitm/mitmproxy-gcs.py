@@ -14,8 +14,8 @@ from tink import aead
 from tink.integration import gcpkms
 
 # Env variables for GCP KMS with Key encryption keys. The default values are set for testing locally.
-GCP_KMS_PROJECT_ID = os.environ.get('GCP_KMS_PROJECT_ID', "mando-host-project")
-GCP_KMS_KEY = os.environ.get('GCP_KMS_KEY', "gcp-kms://projects/mando-host-project/locations/global/keyRings/test/cryptoKeys/proxy-kek")
+GCP_KMS_PROJECT_ID = os.environ.get('GCP_KMS_PROJECT_ID', "your-default-project")
+GCP_KMS_KEY = os.environ.get('GCP_KMS_KEY', "your-default-kms-key")
 GCP_KMS_CREDENTIALS = os.environ.get('GCP_KMS_CREDENTIALS', None)
 
 # Intialize kms client, tink and create envelope AEAD primitive using AES256 GCM for encrypting the data 

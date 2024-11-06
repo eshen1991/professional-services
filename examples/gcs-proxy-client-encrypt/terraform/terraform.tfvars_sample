@@ -1,4 +1,4 @@
-project_id   = "eshenshopping-proj-1"
+project_id   = "your-project-id"
 cluster_name = "gcs-proxy-poc"
 zones        = ["us-central1-a"]
 network_name = "gcs-proxy-nw"

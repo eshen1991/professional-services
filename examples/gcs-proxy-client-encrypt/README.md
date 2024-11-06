@@ -1,11 +1,11 @@
 # GCS Proxy POC
 
-This repository demonstrates a proof-of-concept (POC) for proxying Google Cloud Storage (GCS) requests using Mitmproxy. The primary goal is to intercept GCS upload and download requests, encrypting data before upload and decrypting it after download. The client side encryption with tink adds additional security in addition to the GCS service side encryption offerings.
+This repository demonstrates a proof-of-concept (POC) for proxying Google Cloud Storage (GCS) requests using Mitmproxy. The POC addresses use cases where client side encryption is required(GCS service side encryption is not sufficient),and the functionality needs to be abstracted away from client applicaitons and provided through a separate component, such as a sidecar in k8s.
 
 ## Key Features
 
-- **Transparent Encryption/Decryption:** Data uploaded to GCS is automatically encrypted using Google Cloud KMS and tink at client side, and downloaded data is decrypted seamlessly.
-- **Mitmproxy Integration:** Leverages Mitmproxy as a proxy to intercept and modify HTTP/HTTPS traffic for GCS operations.
+- **Transparent Encryption/Decryption:** Data uploaded to GCS is automatically encrypted using Google Cloud KMS and [Tink](https://developers.google.com/tink)  at client side, and downloaded data is decrypted seamlessly.
+- **Mitmproxy Integration:** Leverages [Mitmproxy](https://mitmproxy.org/) as a proxy to intercept and modify HTTP/HTTPS traffic for GCS operations.
 - **Tink Library:** Utilizes the Tink library for cryptographic operations, ensuring secure key management and encryption practices.
 
 ## How it Works
@@ -31,7 +31,7 @@ This repository demonstrates a proof-of-concept (POC) for proxying Google Cloud 
        - The KMS key is required to perform the client side encryption with tink.
        - Create KEK in Cloud KMS and get the KEK URI of KMS Key. See [Getting a Cloud KMS resource ID](https://cloud.google.com/kms/docs/getting-resource-ids) for details on how to get the path to your key.
 
-    Note: GKE Cluster, KMS key along with the required IAM roles to access KMS key and GCS bucket can be provisioned by running the terraform scripts in terraform directory.
+    Note: GKE Cluster, KMS key along with the required IAM roles to access KMS key and GCS bucket can be provisioned by running the terraform scripts in [terraform](./terraform/) directory.
 
 2. **Environment Variables:**
 
@@ -53,7 +53,7 @@ This repository demonstrates a proof-of-concept (POC) for proxying Google Cloud 
 
    ```
 
-   - Update the docker image with the correct artifact registry image url(`us-docker.pkg.dev/<GCP_PROJECT_ID>/<ARTIFACT_REGISTRY_REPOSTORY>/<IMAGE_NAME>:<TAG>`) in the kubernetes manifext file(i.e. gcs-deplopy.yaml) for both client app and mitm proxy images.
+   - Update the docker image with the correct artifact registry image url(`us-docker.pkg.dev/<GCP_PROJECT_ID>/<ARTIFACT_REGISTRY_REPOSTORY>/<IMAGE_NAME>:<TAG>`) in the kubernetes manifest file, [gcs-deplopy.yaml](./manifests/gcs-deploy.yaml), for both client app and mitm proxy images.
 
 4. **Deploy the kubernetes manifests:**
 
